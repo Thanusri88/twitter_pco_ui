@@ -81,62 +81,32 @@
             <thead>
               <tr>
                 <th
-                  class="
-                    text-uppercase text-secondary text-xxs
-                    font-weight-bolder
-                    opacity-7
-                    ps-2
-                  "
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                 >
                   Channel
                 </th>
                 <th
-                  class="
-                    text-uppercase text-secondary text-xxs
-                    font-weight-bolder
-                    opacity-7
-                    ps-2
-                  "
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                 >
                   Message
                 </th>
                 <th
-                  class="
-                    text-uppercase text-secondary text-xxs
-                    font-weight-bolder
-                    opacity-7
-                    ps-2
-                  "
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                 >
                   Created At
                 </th>
                 <th
-                  class="
-                    text-uppercase text-secondary text-xxs
-                    font-weight-bolder
-                    opacity-7
-                    ps-2
-                  "
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                 >
                   Views
                 </th>
                 <th
-                  class="
-                    text-uppercase text-secondary text-xxs
-                    font-weight-bolder
-                    opacity-7
-                    ps-2
-                  "
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                 >
                   Replies
                 </th>
                 <th
-                  class="
-                    text-uppercase text-secondary text-xxs
-                    font-weight-bolder
-                    opacity-7
-                    ps-2
-                  "
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                 >
                   Forwards
                 </th>
@@ -201,6 +171,7 @@ import VsudButton from "@/components/VsudButton.vue";
 const body = document.getElementsByTagName("body")[0];
 import axios from "axios";
 import { mapMutations } from "vuex";
+import { baseURL } from "../router/endpoint";
 
 export default {
   name: "SignIn",
@@ -234,7 +205,7 @@ export default {
     onSignin() {
       axios
         .get(
-          `https://dataextraction.craftertechnologies.com/api/telegram?channels=${this.username
+          `${baseURL}/api/telegram?channels=${this.username
             .map((e) => e.join(","))
             .join(",")}&keyword=${encodeURIComponent(this.password)}`
         )
@@ -278,7 +249,7 @@ export default {
     },
     fetchData() {
       axios
-        .get(`https://dataextraction.craftertechnologies.com/api/inf`, {
+        .get(`${baseURL}/api/inf`, {
           withCredentials: true,
         })
         .then((res) => {

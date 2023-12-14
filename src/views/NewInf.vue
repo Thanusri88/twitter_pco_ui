@@ -155,6 +155,7 @@ import VsudButton from "@/components/VsudButton.vue";
 const body = document.getElementsByTagName("body")[0];
 import { mapMutations } from "vuex";
 import axios from "axios";
+import { baseURL } from "../router/endpoint";
 
 export default {
   name: "AddTimesheet",
@@ -179,24 +180,20 @@ export default {
   },
   mounted() {
     if (this.$route.params.id) {
-      axios
-        .get(
-          `https://dataextraction.craftertechnologies.com/api/inf/${this.$route.params.id}`
-        )
-        .then((res) => {
-          if (res.data && res.data.payload) {
-            console.log(res.data.payload);
-            this.firstName = res.data.payload.name;
-            this.lastName = res.data.payload.twitterId;
-            this.email = res.data.payload.fbId;
-            this.password = res.data.payload.ttId;
-            this.yt = res.data.payload.ytId;
-            this.ig = res.data.payload.igId;
-            this.channelList = res.data.payload.telegramIds.map((id) => ({
-              value: id,
-            }));
-          }
-        });
+      axios.get(`${baseURL}/api/inf/${this.$route.params.id}`).then((res) => {
+        if (res.data && res.data.payload) {
+          console.log(res.data.payload);
+          this.firstName = res.data.payload.name;
+          this.lastName = res.data.payload.twitterId;
+          this.email = res.data.payload.fbId;
+          this.password = res.data.payload.ttId;
+          this.yt = res.data.payload.ytId;
+          this.ig = res.data.payload.igId;
+          this.channelList = res.data.payload.telegramIds.map((id) => ({
+            value: id,
+          }));
+        }
+      });
     }
   },
   created() {
@@ -220,20 +217,15 @@ export default {
     onSignin() {
       if (this.$route.params.id) {
         axios
-          .patch(
-            `https://dataextraction.craftertechnologies.com/api/inf/${this.$route.params.id}`,
-            {
-              name: this.firstName,
-              twitterId: this.lastName,
-              fbId: this.email,
-              ttId: this.password,
-              ytId: this.yt,
-              igId: this.ig,
-              telegramIds: this.channelList
-                .map((i) => i.value)
-                .filter((i) => i),
-            }
-          )
+          .patch(`${baseURL}/api/inf/${this.$route.params.id}`, {
+            name: this.firstName,
+            twitterId: this.lastName,
+            fbId: this.email,
+            ttId: this.password,
+            ytId: this.yt,
+            igId: this.ig,
+            telegramIds: this.channelList.map((i) => i.value).filter((i) => i),
+          })
           .then((res) => {
             if (!res.data.error) {
               this.$router.push(`/influencers`);
@@ -243,7 +235,7 @@ export default {
           });
       } else {
         axios
-          .post("https://dataextraction.craftertechnologies.com/api/inf", {
+          .post(`${baseURL}/api/inf`, {
             name: this.firstName,
             twitterId: this.lastName,
             fbId: this.email,

@@ -63,68 +63,37 @@
                 <thead>
                   <tr>
                     <th
-                      class="
-                        text-uppercase text-secondary text-xxs
-                        font-weight-bolder
-                        opacity-7
-                        ps-2
-                      "
+                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                     >
                       Nickname
                     </th>
                     <th
-                      class="
-                        text-uppercase text-secondary text-xxs
-                        font-weight-bolder
-                        opacity-7
-                        ps-2
-                      "
+                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                     >
                       Twitter
                     </th>
                     <th
-                      class="
-                        text-uppercase text-secondary text-xxs
-                        font-weight-bolder
-                        opacity-7
-                        ps-2
-                      "
+                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                     >
                       Telegram
                     </th>
                     <th
-                      class="
-                        text-uppercase text-secondary text-xxs
-                        font-weight-bolder
-                        opacity-7
-                      "
+                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
                       Facebook
                     </th>
                     <th
-                      class="
-                        text-uppercase text-secondary text-xxs
-                        font-weight-bolder
-                        opacity-7
-                      "
+                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
                       TikTok
                     </th>
                     <th
-                      class="
-                        text-uppercase text-secondary text-xxs
-                        font-weight-bolder
-                        opacity-7
-                      "
+                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
                       YouTube
                     </th>
                     <th
-                      class="
-                        text-uppercase text-secondary text-xxs
-                        font-weight-bolder
-                        opacity-7
-                      "
+                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                     >
                       Instagram
                     </th>
@@ -238,6 +207,7 @@
 <script>
 import VsudButton from "@/components/VsudButton.vue";
 import axios from "axios";
+import { baseURL } from "../router/endpoint";
 export default {
   name: "timesheet",
   data() {
@@ -255,7 +225,7 @@ export default {
   methods: {
     fetchData() {
       axios
-        .get(`https://dataextraction.craftertechnologies.com/api/inf`, {
+        .get(`${baseURL}/api/inf`, {
           withCredentials: true,
         })
         .then((res) => {
@@ -275,13 +245,9 @@ export default {
     },
     confirmDelete() {
       axios
-        .delete(
-          "https://dataextraction.craftertechnologies.com/api/inf/" +
-            this.toDelete,
-          {
-            withCredentials: true,
-          }
-        )
+        .delete(baseURL + "/api/inf/" + this.toDelete, {
+          withCredentials: true,
+        })
         .then(() => {
           this.fetchData();
         })

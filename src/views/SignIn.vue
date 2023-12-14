@@ -81,61 +81,32 @@
             <thead>
               <tr>
                 <th
-                  class="
-                    text-uppercase text-secondary text-xxs
-                    font-weight-bolder
-                    opacity-7
-                  "
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                 >
                   Username
                 </th>
                 <th
-                  class="
-                    text-uppercase text-secondary text-xxs
-                    font-weight-bolder
-                    opacity-7
-                    ps-2
-                  "
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                 >
                   Tweet
                 </th>
                 <th
-                  class="
-                    text-uppercase text-secondary text-xxs
-                    font-weight-bolder
-                    opacity-7
-                    ps-2
-                  "
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                 >
                   Created At
                 </th>
                 <th
-                  class="
-                    text-uppercase text-secondary text-xxs
-                    font-weight-bolder
-                    opacity-7
-                    ps-2
-                  "
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                 >
                   Like
                 </th>
                 <th
-                  class="
-                    text-uppercase text-secondary text-xxs
-                    font-weight-bolder
-                    opacity-7
-                    ps-2
-                  "
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                 >
                   Replies
                 </th>
                 <th
-                  class="
-                    text-uppercase text-secondary text-xxs
-                    font-weight-bolder
-                    opacity-7
-                    ps-2
-                  "
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                 >
                   Retweet
                 </th>
@@ -202,6 +173,7 @@ import VsudButton from "@/components/VsudButton.vue";
 const body = document.getElementsByTagName("body")[0];
 import axios from "axios";
 import { mapMutations } from "vuex";
+import { baseURL } from "../router/endpoint";
 
 export default {
   name: "SignIn",
@@ -234,7 +206,7 @@ export default {
     ...mapMutations(["toggleEveryDisplay", "toggleHideConfig"]),
     fetchData() {
       axios
-        .get(`https://dataextraction.craftertechnologies.com/api/inf`, {
+        .get(`${baseURL}/api/inf`, {
           withCredentials: true,
         })
         .then((res) => {
@@ -251,7 +223,7 @@ export default {
     onSignin() {
       axios
         .get(
-          `https://dataextraction.craftertechnologies.com/api/twitter?username=${this.username.join(
+          `${baseURL}/api/twitter?username=${this.username.join(
             ","
           )}&hashtag=${encodeURIComponent(this.password)}`
         )

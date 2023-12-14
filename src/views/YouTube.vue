@@ -81,32 +81,17 @@
             <thead>
               <tr>
                 <th
-                  class="
-                    text-uppercase text-secondary text-xxs
-                    font-weight-bolder
-                    opacity-7
-                    ps-2
-                  "
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                 >
                   Channel
                 </th>
                 <th
-                  class="
-                    text-uppercase text-secondary text-xxs
-                    font-weight-bolder
-                    opacity-7
-                    ps-2
-                  "
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                 >
                   Video Title
                 </th>
                 <th
-                  class="
-                    text-uppercase text-secondary text-xxs
-                    font-weight-bolder
-                    opacity-7
-                    ps-2
-                  "
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                 >
                   Created At
                 </th>
@@ -166,6 +151,7 @@ import VsudButton from "@/components/VsudButton.vue";
 const body = document.getElementsByTagName("body")[0];
 import axios from "axios";
 import { mapMutations } from "vuex";
+import { baseURL } from "../router/endpoint";
 
 export default {
   name: "SignIn",
@@ -199,7 +185,7 @@ export default {
     onSignin() {
       axios
         .get(
-          `https://dataextraction.craftertechnologies.com/api/yt?channelId=${this.username.join(
+          `${baseURL}/api/yt?channelId=${this.username.join(
             ","
           )}&keyword=${encodeURIComponent(this.password)}`
         )
@@ -245,7 +231,7 @@ export default {
     },
     fetchData() {
       axios
-        .get(`https://dataextraction.craftertechnologies.com/api/inf`, {
+        .get(`${baseURL}/api/inf`, {
           withCredentials: true,
         })
         .then((res) => {

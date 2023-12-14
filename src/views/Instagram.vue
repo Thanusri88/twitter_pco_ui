@@ -77,42 +77,22 @@
             <thead>
               <tr>
                 <th
-                  class="
-                    text-uppercase text-secondary text-xxs
-                    font-weight-bolder
-                    opacity-7
-                    ps-2
-                  "
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                 >
                   Username
                 </th>
                 <th
-                  class="
-                    text-uppercase text-secondary text-xxs
-                    font-weight-bolder
-                    opacity-7
-                    ps-2
-                  "
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                 >
                   Caption
                 </th>
                 <th
-                  class="
-                    text-uppercase text-secondary text-xxs
-                    font-weight-bolder
-                    opacity-7
-                    ps-2
-                  "
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                 >
                   Like
                 </th>
                 <th
-                  class="
-                    text-uppercase text-secondary text-xxs
-                    font-weight-bolder
-                    opacity-7
-                    ps-2
-                  "
+                  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                 >
                   Comment
                 </th>
@@ -171,6 +151,7 @@ import VsudButton from "@/components/VsudButton.vue";
 const body = document.getElementsByTagName("body")[0];
 import axios from "axios";
 import { mapMutations } from "vuex";
+import { baseURL } from "../router/endpoint";
 
 export default {
   name: "SignIn",
@@ -204,7 +185,7 @@ export default {
     onSignin() {
       axios
         .get(
-          `https://dataextraction.craftertechnologies.com/api/instagram?username=${this.username.join(
+          `${baseURL}/api/instagram?username=${this.username.join(
             ","
           )}&keyword=${encodeURIComponent(this.password)}`
         )
@@ -250,7 +231,7 @@ export default {
     },
     fetchData() {
       axios
-        .get(`https://dataextraction.craftertechnologies.com/api/inf`, {
+        .get(`${baseURL}/api/inf`, {
           withCredentials: true,
         })
         .then((res) => {
